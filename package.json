@@ -1,0 +1,38 @@
+{
+  "name": "hubot-particle",
+  "version": "1.0.0",
+  "author": "Jason Solis",
+  "keywords": [
+    "github",
+    "hubot",
+    "particle",
+    "photon",
+    "core",
+    "adapter"
+  ],
+  "description": "A hubot adapter for controlling your particle photon / particle core",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/tombell/hubot-twilio/raw/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsolis/hubot-particle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jsolis/hubot-particle/issues"
+  },
+  "dependencies": {
+    "spark": "^1.0.0"
+  },
+  "devDependencies": {
+    "coffee-script": "1.1.3"
+  },
+  "main": "./src/particle",
+  "engines": {
+    "node": "*"
+  }
+}
+
