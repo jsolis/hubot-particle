@@ -5,6 +5,18 @@
 This Hubot adapter uses the ParticleJS library to communicate and control your Particle Photon / Particle Core devices.
 The syntax was inspired by the particle cli utility.
 
+## Supported Features
+* list
+* callFunction
+
+## Planned Features
+* getAttributes
+* getVariable
+* signal
+* stopSignal
+* publish
+* subscribe
+
 ## Sample Interaction
 
 To get a list of your claimed devices associated with your access token
