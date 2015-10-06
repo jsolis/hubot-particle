@@ -1,6 +1,6 @@
 {
   "name": "hubot-particle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jason Solis",
   "keywords": [
     "github",
@@ -35,4 +35,3 @@
     "node": "*"
   }
 }
-
