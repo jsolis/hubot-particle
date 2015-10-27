@@ -8,9 +8,9 @@ The syntax was inspired by the particle cli utility.
 ## Supported Features
 * list
 * callFunction
+* getVariable
 
 ## Planned Features
-* getVariable
 * signal
 * stopSignal
 * publish
@@ -21,14 +21,27 @@ The syntax was inspired by the particle cli utility.
 To get a list of your claimed devices associated with your access token
 ```
 user> Hubot particle list
-hubot> dorito is online
-hubot> pretzel is offline
+hubot> Your devices:
+hubot> dorito [123abc] (Photon) is online
+hubot>  Variables:
+hubot>    ledStatus (string)
+hubot>  Functions:
+hubot>    int led(String args)
+hubot> pretzel [567def] (Core) is offline
 ```
 
 To call a function on your device that has been uploaded to your device and registered to the Particle cloud
 ```
-user> Hubot particle call <device-id> <function> <params>
+doc> Hubot particle call <device-id> <function> <params>
+user> Hubot particle call dorito led on
 hubot> Received response code 1
+```
+
+To retrieve a variable
+```
+doc> Hubot particle get <device-id> <variable>
+user> Hubot particle get dorito ledStatus
+hubot> on
 ```
 
 See [`src/particle.coffee`](src/particle.coffee) for full documentation.
