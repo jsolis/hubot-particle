@@ -41,14 +41,30 @@ module.exports = (robot) ->
       , (err) ->
         console.log "err", err
 
+# data returned by getAttributes
+# {"id":"29003e000747343339373536","name":"dorito","connected":true,"variables":{},"functions":["led"],"cc3000_patch_version":"wl0: Nov  7 2014 16:03:45 version 5.90.230.12 FWID 01-4d2401b7","product_id":6,"last_heard":"2015-10-27T00:04:08.929Z"}
+# dorito [29003e000747343339373536] (Photon) is offline
+#   Functions:
+#     int led(String args) 
+# pretzel [53ff76066667574807262367] (Core) is offline
+
   robot.respond /particle list/i, (res) ->
     spark.login({accessToken: particleAccessToken})
       .then (token) ->
         spark.listDevices (err, devices) ->
           for device in devices
-            status = if device.connected then "online" else "offline"
-            upgrade = if device.requiresUpgrade then " (requires upgrade)" else ""
-            res.send "#{device.name} is #{status}#{upgrade}"
+            device.getAttributes (err, data) ->
+              res.send JSON.stringify(data)
+              if err
+                res.send "ERROR getting details on #{data.name}"
+              else
+                status = if data.connected then "online" else "offline"
+                deviceType = "Photon" if data.product_id == 6
+                deviceType = "Core" if data.product_id == 0
+                res.send "#{device.name} [#{data.id}] (#{deviceType}) is #{status}"
+                if data.functions
+                  res.send "  Functions:"
+                  for func in data.functions
+                    res.send "    int #{func}(String args)"
       , (err) ->
         console.log "err", err
-
