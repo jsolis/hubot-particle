@@ -9,10 +9,10 @@ The syntax was inspired by the particle cli utility.
 * list
 * callFunction
 * getVariable
-
-## Planned Features
 * signal
 * stopSignal
+
+## Planned Features
 * publish
 * subscribe
 
@@ -42,6 +42,20 @@ To retrieve a variable
 doc> Hubot particle get <device-id> <variable>
 user> Hubot particle get dorito ledStatus
 hubot> on
+```
+
+To shout rainbows
+```
+doc> Hubot particle signal <device-id>
+user> Hubot particle signal dorito
+hubot> Signaling dorito
+```
+
+To stop shouting rainbows
+```
+doc> Hubot particle stop signal <device-id>
+user> Hubot particle stop signal dorito
+hubot> Stopped signaling dorito
 ```
 
 See [`src/particle.coffee`](src/particle.coffee) for full documentation.
