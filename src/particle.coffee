@@ -11,6 +11,8 @@
 #  hubot particle list - Generates a list of what devices you own, and displays information about their status
 #  hubot particle call <device-id> <function> <params> - Calls a function on one of your devices
 #  hubot particle get <device-id> <variable> - Retrieves a variable from one of your devices
+#  hubot particle signal <device-id> - Send a signal to the device to shout rainbows
+#  hubot particle stop signal <device-id> - Send a signal to the device to stop shouting rainbows
 #
 # Notes:
 #  Inspired by particle-cli syntax:
@@ -89,3 +91,28 @@ module.exports = (robot) ->
       , (err) ->
         console.log "err", err
 
+  robot.respond /particle signal (.*)/i, (res) ->
+    device = res.match[1]
+
+    spark.login({accessToken: particleAccessToken})
+      .then (token) ->
+        spark.getDevice device, (err, device) ->
+          device.signal (err, data) ->
+            res.send "ERROR sending signal to #{device.name}: #{err}" if err
+            res.send "Signaling #{device.name}" if data.signaling
+            res.send ":( Trouble signaling #{device.name}" unless data.signaling
+      , (err) ->
+        console.log "err", err
+
+  robot.respond /particle stop\s?signal (.*)/i, (res) ->
+    device = res.match[1]
+
+    spark.login({accessToken: particleAccessToken})
+      .then (token) ->
+        spark.getDevice device, (err, device) ->
+          device.stopSignal (err, data) ->
+            res.send "ERROR stopping signal to #{device.name}: #{err}" if err
+            res.send "Stopped signaling #{device.name}" unless data.signaling
+            res.send ":( Trouble stopping signal to #{device.name}" if data.signaling
+      , (err) ->
+        console.log "err", err
