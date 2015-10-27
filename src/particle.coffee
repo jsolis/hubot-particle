@@ -10,6 +10,7 @@
 # Commands:
 #  hubot particle list - Generates a list of what devices you own, and displays information about their status
 #  hubot particle call <device-id> <function> <params> - Calls a function on one of your devices
+#  hubot particle get <device-id> <variable> - Retrieves a variable from one of your devices
 #
 # Notes:
 #  Inspired by particle-cli syntax:
