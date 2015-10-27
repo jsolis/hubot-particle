@@ -10,7 +10,6 @@ The syntax was inspired by the particle cli utility.
 * callFunction
 
 ## Planned Features
-* getAttributes
 * getVariable
 * signal
 * stopSignal
