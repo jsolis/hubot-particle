@@ -53,7 +53,9 @@ See [`src/particle.coffee`](src/particle.coffee) for full documentation.
 
 In hubot project repo, run:
 
-`npm install hubot-particle --save`
+```
+npm install hubot-particle --save
+```
 
 Then add **hubot-particle** to your `external-scripts.json`:
 
