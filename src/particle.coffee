@@ -54,7 +54,6 @@ module.exports = (robot) ->
     spark.login({accessToken: particleAccessToken})
       .then (token) ->
         spark.listDevices (err, devices) ->
-          res.send "Your devices:"
           for device in devices
             device.getAttributes (err, data) ->
               #res.send JSON.stringify(data)
