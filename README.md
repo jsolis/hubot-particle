@@ -1,8 +1,8 @@
-# Hubot Particle Photon Adapter
+# Hubot Particle Photon Script
 
 ## Description
 
-This Hubot adapter uses the ParticleJS library to communicate and control your Particle Photon / Particle Core devices.
+This Hubot script uses the ParticleJS library to communicate and control your Particle Photon / Particle Core devices.
 The syntax was inspired by the particle cli utility.
 
 ## Supported Features
@@ -76,7 +76,7 @@ Then add **hubot-particle** to your `external-scripts.json`:
 ```json
 ["hubot-particle"]
 ```
-You will need to set one environment variable to use this adapter.
+You will need to set one environment variable to use this script.
 
 ```
 export HUBOT_PARTICLE_ACCESS_TOKEN=abc123
