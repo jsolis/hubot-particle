@@ -25,7 +25,7 @@
     "url": "https://github.com/jsolis/hubot-particle/issues"
   },
   "dependencies": {
-    "spark": "^1.0.0"
+    "particle-api-js": "^7.2.3"
   },
   "devDependencies": {
     "coffee-script": "1.1.3"

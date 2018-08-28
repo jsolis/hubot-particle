@@ -2,7 +2,7 @@
 #  Control your particle core/photon
 #
 # Dependencies:
-#  "spark": "^1.0.0"
+#  "particle-api-js": "^7.2.3"
 #
 # Configuration:
 #  HUBOT_PARTICLE_ACCESS_TOKEN
@@ -22,7 +22,8 @@
 # Author:
 #  jsolis
 
-spark = require "spark"
+Particle = require "particle-api-js"
+particle = new Particle()
 
 particleAccessToken = process.env.HUBOT_PARTICLE_ACCESS_TOKEN
 
@@ -35,9 +36,9 @@ module.exports = (robot) ->
     functionName = res.match[2]
     params = res.match[3]
 
-    spark.login({accessToken: particleAccessToken})
+    particle.login({accessToken: particleAccessToken})
       .then (token) ->
-        spark.getDevice device, (err, device) ->
+        particle.getDevice device, (err, device) ->
           device.callFunction functionName, params, (err, data) ->
             res.send "ERROR calling #{functionName} on #{device.name}: #{err}" if err
             res.send "Received response code #{data.return_value}"
@@ -54,9 +55,9 @@ module.exports = (robot) ->
 # pretzel [53ff76066667574807262367] (Core) is offline
 
   robot.respond /particle list/i, (res) ->
-    spark.login({accessToken: particleAccessToken})
+    particle.login({accessToken: particleAccessToken})
       .then (token) ->
-        spark.listDevices (err, devices) ->
+        particle.listDevices (err, devices) ->
           for device in devices
             device.getAttributes (err, data) ->
               #res.send JSON.stringify(data)
@@ -82,9 +83,9 @@ module.exports = (robot) ->
     device = res.match[1]
     variableName = res.match[2]
 
-    spark.login({accessToken: particleAccessToken})
+    particle.login({accessToken: particleAccessToken})
       .then (token) ->
-        spark.getDevice device, (err, device) ->
+        particle.getDevice device, (err, device) ->
           device.getVariable variableName, (err, data) ->
             res.send "ERROR getting #{variableName} on #{device.name}: #{err}" if err
             res.send data.result
@@ -94,9 +95,9 @@ module.exports = (robot) ->
   robot.respond /particle signal (.*)/i, (res) ->
     device = res.match[1]
 
-    spark.login({accessToken: particleAccessToken})
+    particle.login({accessToken: particleAccessToken})
       .then (token) ->
-        spark.getDevice device, (err, device) ->
+        particle.getDevice device, (err, device) ->
           device.signal (err, data) ->
             res.send "ERROR sending signal to #{device.name}: #{err}" if err
             res.send "Signaling #{device.name}" if data.signaling
@@ -107,9 +108,9 @@ module.exports = (robot) ->
   robot.respond /particle stop\s?signal (.*)/i, (res) ->
     device = res.match[1]
 
-    spark.login({accessToken: particleAccessToken})
+    particle.login({accessToken: particleAccessToken})
       .then (token) ->
-        spark.getDevice device, (err, device) ->
+        particle.getDevice device, (err, device) ->
           device.stopSignal (err, data) ->
             res.send "ERROR stopping signal to #{device.name}: #{err}" if err
             res.send "Stopped signaling #{device.name}" unless data.signaling
